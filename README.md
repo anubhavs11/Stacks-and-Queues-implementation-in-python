@@ -1,1 +1,1 @@
-# Stacks-and-Queues-implementation-in-python
+# Data-Structure-and-Algorithms-in-python
