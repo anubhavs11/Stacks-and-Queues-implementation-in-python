@@ -132,8 +132,8 @@ class Binary_Search_Tree(object):
         return node;
                 
     def getPredecessor(self,node,data):
-        if not node:
-            node.leftChild=self.getPredecessor(node.leftChild,data)
+        if node.rightChild:
+            node.rightChild=self.getPredecessor(node.rightChild,data)
         return node
         
     def remove(self,data):
