@@ -1,4 +1,3 @@
-// Segmentation Fault
 
 #include<iostream>
 using namespace std;
