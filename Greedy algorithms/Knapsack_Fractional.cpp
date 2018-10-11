@@ -1,6 +1,5 @@
 #include <iostream>
 #include<string.h>
-#include <iomanip>
 
 using namespace std;
 
@@ -21,7 +20,6 @@ void SortByRatio(float val[],float w[],int n){
         temp = val[p];
         val[p] = val[i];
         val[i] = temp;
-        
     }
 }
 
