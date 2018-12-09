@@ -27,6 +27,7 @@ class Linked_List{
                 tail->next = newNode;
                 newNode->next = head;
                 tail = newNode;
+                tail->next = head;
             }
         }
         void display(){
