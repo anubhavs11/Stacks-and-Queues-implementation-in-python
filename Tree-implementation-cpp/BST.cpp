@@ -62,29 +62,32 @@ public:
         cout<<h->data<<" ";
         disp(h->right);
     }
-    void deleteNode(struct Node *r,data){
+    Node* deleteNode(struct Node *r,int data){
         if(data < r->data ){
-            deleteNode(r->left , data);
+            r->left = deleteNode(r->left , data);
         }
         else if(data > r->data){
-            deleteNode(r->right , data);
+            r->right = deleteNode(r->right , data);
         }
         else{
                 if(r->left == NULL && r->right == NULL){
                     delete r;
+                    return NULL;
                 }
                 else if(r->right == NULL){
-                    r->data = r->left->data;
-                    delete r->left;
+                    struct Node *temp = r->left;
+                    delete r;
+                    return temp;
                 }
                 else if(r->left == NULL){
-                    r->data = r->right->data;
-                    delete r->right;
+                    struct Node *temp = r->right;
+                    delete r;
+                    return temp;
                 }
                 else{
                     struct Node *temp = getPredecessor(r->left);
                     r->data = temp->data;
-                    deleteNode(r->left , temp->data);
+                    r->left = deleteNode(r->left , temp->data);
                 }
         }
     }
@@ -98,17 +101,20 @@ public:
     }
     void deletion(int data){
         if(root != NULL){
-            deleteNode(root,data);
+            root = deleteNode(root,data);
         }
     }
 };
 
 int main(){
     Tree ob;
-    ob.insert(1);
-    ob.insert(2);
-    ob.insert(3);
-    ob.insert(4);
+    ob.insert(10);
+    ob.insert(8);
+    ob.insert(6);
+    ob.insert(12);
+    ob.insert(11);
     ob.display();
-    // Deletion not working
+    cout<<"\n";
+    ob.deletion(11);
+    ob.display();
 }
