@@ -64,7 +64,7 @@ public:
             return prev;
         }
     }
-    void inOrder_predecessor(int data){
+    void inOrder_Successor(int data){
         inOrder(root,data,-1);
     }
 };
@@ -78,5 +78,5 @@ int main(){
     ob.insert(10);
     ob.insert(14);
     ob.insert(22);
-    ob.inOrder_predecessor(12);
+    ob.inOrder_Successor(12);
 }
