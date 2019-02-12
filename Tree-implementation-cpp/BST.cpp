@@ -13,6 +13,26 @@ public:
     Tree(){
         root = NULL;
     }
+    void height(){
+        int h=0;
+        if(root!=NULL){
+            h = getHeight(root);
+        }
+        cout<<h<<endl;    
+    }
+    int getHeight(struct Node *node){
+        if(node==NULL){
+            return 0;
+        }
+        else{
+            int lheight=0,rheight;
+            if(node->left!=NULL)
+                lheight = getHeight(node->left);
+            if(node->right!=NULL)
+                rheight = getHeight(node->right);
+            return 1+max(lheight,rheight);
+        }
+    }
     void insertion(struct Node *r,int value){
         if(value < r->data){
             if(r->left == NULL){
@@ -117,4 +137,7 @@ int main(){
     cout<<"\n";
     ob.deletion(11);
     ob.display();
+    cout<<"\nHeight of the Tree:";
+    ob.height();
+
 }
