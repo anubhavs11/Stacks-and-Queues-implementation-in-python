@@ -1,46 +1,38 @@
-#include<vector>
-#include<iostream>
-const int MAX = 10001;
-std::vector<std::pair<int, int>> arr[MAX];
-int dis[MAX];
+ #include <bits/stdc++.h>
+ using namespace std;
+ int main() {
+    int n,m;
+    cin>>n>>m;
+    vector <int> v [m+1];
+    int dis [n+1];
 
-void initialize() {
-    for (int i = 0; i < MAX; i++) {
-        dis[i] = MAX;
-    }
-}
+    for(int i = 1; i <=n; i++)
+        dis[i] = 1e9;
 
-int main() {
-    int nodes, edges, x, y, weight;
-    std::cin >> nodes >> edges;
-    
-    for (int i = 0; i < edges; i++) {
-        std::cin >> x >> y >> weight;
-        arr[x].push_back(std::make_pair(y, weight));
-    }
-    
-    initialize();
-    bool improvement = true;
-    
-    for (int i = 1; i < nodes; i++) {
-        dis[1] = 0;
-        if(improvement){
-            improvement = false;
-            for (int j = 1; j <= nodes; j++) {
-                for (int k = 0; k < arr[j].size(); k++) {
-                    if ((dis[j] + arr[j][k].second) < dis[arr[j][k].first]) {
-                        dis[arr[j][k].first] = (dis[j] + arr[j][k].second);
-                        improvement = true;
-                    }
-                }
-            }
-        }
-        else{
+   for(int i = 0; i < m; i++){
+        int s,d,w;
+        cin>>s>>d>>w;
+
+        v[i].push_back(s);
+        v[i].push_back(d);
+        v[i].push_back(w);
+   }
+    dis[1] = 0;
+    bool running=true;;
+    for(int i = 0; i < n - 1; i++){
+        int j=0;
+        if(running == false)
             break;
+        running = false;
+        while(j<m){
+
+            if(dis[ v[j][0]  ] + v[j][2] < dis[ v[j][1] ] ){
+                dis[ v[j][1] ] = dis[ v[j][0]  ] + v[j][2];
+                running = true;
+            }
+            j++;
         }
     }
-    
-    for (int i = 2; i <= nodes; i++) {
-    std::cout << dis[i] <<" ";
-    }
-}
+    for(int i=2;i<=n;i++)
+        cout<<dis[i]<<" ";
+    } 
