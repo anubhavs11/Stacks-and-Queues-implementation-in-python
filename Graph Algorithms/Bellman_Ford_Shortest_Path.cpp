@@ -1,37 +1,37 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
+#define MAX 1e9
 
-int main() {
-    int n,m;
-    cin>>n>>m;
+int main(){
+    int N, M;
+    cin>>N>>M;
     
-    vector <int> v [m+1];
-    int dis [n+1];
-
-    for(int i = 1; i <=n; i++){
-        dis[i] = 2e9;
+    vector<pair<int, int>> adj[N+1];
+    int x1, y, w;
+    for(int i = 0; i < M; i++){
+        cin>>x1>>y>>w;
+        adj[x1].push_back(make_pair(y, w));
     }
-
-   for(int i = 0; i < m; i++){
-        int s,d,w;
-        cin>>s>>d>>w;
-
-        v[i].push_back(s);
-        v[i].push_back(d);
-        v[i].push_back(w);
-   }
-
+    int dis[N+1];
+    for(int i = 0; i <= N; i++){
+        dis[i] = MAX;
+    }
     dis[1] = 0;
-    for(int i = 0; i < n - 1; i++){
-        int j=0;
-        while(v[j].size() != 0){
-
-            if(dis[ v[j][0]  ] + v[j][2] < dis[ v[j][1] ] ){
-                dis[ v[j][1] ] = dis[ v[j][0]  ] + v[j][2];
+    queue<int> q;
+    
+    q.push(1);
+    while(!q.empty()){
+        int x = q.front(); q.pop();
+        for(int i = 0; i < adj[x].size(); i++){
+            if(dis[adj[x][i].first] > dis[x] + adj[x][i].second){
+                dis[adj[x][i].first] = dis[x] + adj[x][i].second;
+                q.push(adj[x][i].first);
             }
-            j++;
         }
     }
-    for(int i=2;i<=n;i++)
+    for(int i = 2; i <= N; i++){
         cout<<dis[i]<<" ";
+        
+    }
+    cout<<endl;
 }
